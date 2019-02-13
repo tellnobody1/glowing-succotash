@@ -1,0 +1,4 @@
+<plugin>
+  <name>eq</name>
+  <classname>cplugin.EqPlugin</classname>
+</plugin>
