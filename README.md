@@ -4,7 +4,7 @@ Compiler plugins for Scala.
 
 ## Eq
 
-Restrict ```==``` to compare only same types. 
+Restrict `==`/`!=` to compare only same types. 
 
 ## Use
 

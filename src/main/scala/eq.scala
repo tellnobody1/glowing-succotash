@@ -14,10 +14,10 @@ class EqPlugin(override val global: Global) extends Plugin {
     val runsAfter = List[String]("refchecks")
     def newPhase(prev: Phase): Phase = new StdPhase(prev) {
       override def apply(unit: CompilationUnit): Unit = {
-        global.reporter.echo("Checking ==")
+        global.reporter.echo("Checking == and !=")
         for (
-          tree @ Apply(Select(l, nme.EQ), List(r)) <- unit.body
-            if !(l.tpe.dealiasWiden =:= r.tpe.dealiasWiden)
+          tree @ Apply(Select(l, op), List(r)) <- unit.body
+            if !(l.tpe.dealiasWiden =:= r.tpe.dealiasWiden) && (op == nme.EQ || op == nme.NE)
         ) {
           global.reporter.error(tree.pos, s"comparing ${l.tpe} with ${r.tpe}")
         }

@@ -8,5 +8,4 @@ scalacOptions ++= Vector(
 
 val root = project.in(file(".")).withId("demo")
 
-autoCompilerPlugins := true
 addCompilerPlugin("name.tellnobody1" %% "cplugin" % "0.0.1")
