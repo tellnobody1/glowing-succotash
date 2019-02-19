@@ -7,8 +7,8 @@ val demo = project.in(file(".")).settings(
   ),
   run / fork := true,
   Compile / run / mainClass := Some("Demo"),
-  libraryDependencies += "com.github.zero-deps" %% "gs-meta" % "0.0.1",
-  libraryDependencies += "com.github.zero-deps" %% "gs-ops" % "0.0.1",
+  libraryDependencies += "com.github.zero-deps" %% "gs-meta" % "latest.integration",
+  libraryDependencies += "com.github.zero-deps" %% "gs-ops" % "latest.integration",
 )
 
-addCompilerPlugin("com.github.zero-deps" %% "gs-plug" % "0.0.1")
+addCompilerPlugin("com.github.zero-deps" %% "gs-plug" % "latest.integration")

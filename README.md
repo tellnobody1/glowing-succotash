@@ -9,7 +9,7 @@ Restrict `==`/`!=` to compare only same types.
 ### Use
 
 ```sbt
-addCompilerPlugin("com.github.zero-deps" %% "gs-plug" % "0.0.1")
+addCompilerPlugin("com.github.zero-deps" %% "gs-plug" % "latest.integration")
 ```
 
 ## meta
@@ -19,7 +19,7 @@ Formatted integers.
 ### Use
 
 ```sbt
-libraryDependencies += "com.github.zero-deps" %% "gs-meta" % "0.0.1"
+libraryDependencies += "com.github.zero-deps" %% "gs-meta" % "latest.integration"
 ```
 
 ```scala
@@ -33,7 +33,7 @@ Cast to superclass.
 ## Use
 
 ```sbt
-libraryDependencies += "com.github.zero-deps" %% "gs-ops" % "0.0.1"
+libraryDependencies += "com.github.zero-deps" %% "gs-ops" % "latest.integration"
 ```
 
 ```scala

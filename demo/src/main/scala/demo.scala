@@ -25,16 +25,16 @@ object Demo extends App {
   1.toInt + 1.toLong == 2.toLong 
 
   // doesn't compile:
-  // b1 == c  // ko
-  // b1 == a  // ko
-  // a == b1  // ko
-  // b1 == c  // ko
-  // b1 != c  // ko
-  // b1 != a  // ko
-  // a != b1  // ko
-  // b1 != c  // ko
-  // i + 1 == l + 1 // ko
-  // i + 1 != l + 1 // ko
+  b1 == c  // ko
+  b1 == a  // ko
+  a == b1  // ko
+  b1 == c  // ko
+  b1 != c  // ko
+  b1 != a  // ko
+  a != b1  // ko
+  b1 != c  // ko
+  i + 1 == l + 1 // ko
+  i + 1 != l + 1 // ko
 
   assert(i"1'000'000" == 1000000)
 
