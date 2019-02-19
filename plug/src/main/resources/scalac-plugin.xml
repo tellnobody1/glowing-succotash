@@ -1,0 +1,4 @@
+<plugin>
+  <name>eq</name>
+  <classname>zd.gs.plug.EqPlugin</classname>
+</plugin>

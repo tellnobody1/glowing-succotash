@@ -1,27 +1,45 @@
-class Demo {
-  def f(a: A, b1: B, b2: B, c: C, i: Int, l: Long): Unit = {
-    a == a   // ok
-    b1 == b2 // ok
-    b1 == c  // ko
-    b1 == a  // ko
-    a == b1  // ko
-    b1 == c  // ko
-    a != a   // ok
-    b1 != b2 // ok
-    b1 != c  // ko
-    b1 != a  // ko
-    a != b1  // ko
-    b1 != c  // ko
+import zd.gs.meta.Literals
+import zd.gs.ops.Cast
 
-    i + 1 == l + 1 // ko
-    i.toLong + 1 == l + 1 // ok
-    i + 1 != l + 1 // ko
-    i.toLong + 1 != l + 1 // ok
-
-    1.toInt + 1.toLong == 2.toLong // ok
-  }
-
+object Demo extends App {
   trait A
   class B extends A
   class C extends A
+
+  val a: A = new B
+  val b1: B = new B
+  val b2: B = new B
+  val c: C = new C
+  val i: Int = 1
+  val l: Long = 1
+
+  // compiles:
+  a == a   
+  b1 == b2 
+  a == b1.as[A] 
+  a != a   
+  b1 != b2 
+  a != b1.as[A] 
+  i.toLong + 1 == l + 1 
+  i.toLong + 1 != l + 1 
+  1.toInt + 1.toLong == 2.toLong 
+
+  // doesn't compile:
+  // b1 == c  // ko
+  // b1 == a  // ko
+  // a == b1  // ko
+  // b1 == c  // ko
+  // b1 != c  // ko
+  // b1 != a  // ko
+  // a != b1  // ko
+  // b1 != c  // ko
+  // i + 1 == l + 1 // ko
+  // i + 1 != l + 1 // ko
+
+  assert(i"1'000'000" == 1000000)
+
+  // compiles:
+  "".as[Any]
+  // doesn't compile:
+  // 1.as[Long] // ko
 }

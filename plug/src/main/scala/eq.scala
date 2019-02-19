@@ -1,4 +1,4 @@
-package cplugin
+package zd.gs.plug
 
 import scala.tools.nsc.{Global, Phase}
 import scala.tools.nsc.plugins.{Plugin, PluginComponent}
