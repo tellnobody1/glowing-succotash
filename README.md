@@ -55,5 +55,5 @@ $ sbt
 
 ```bash
 $ sbt
-> sonatypeRelease
+> publish
 ```
