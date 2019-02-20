@@ -1,7 +1,7 @@
 ThisBuild / scalaVersion := "2.12.8"
-ThisBuild / organization := "com.github.zero-deps"
+ThisBuild / organization := "io.github.zero-deps"
 ThisBuild / homepage := Some(url("https://github.com/zero-deps/glowing-succotash"))
-ThisBuild / scmInfo := Some(ScmInfo(url("https://github.com/zero-deps/glowing-succotash"), "git@github.com:zero-deps/glowing-succotash.git"))
+ThisBuild / scmInfo := Some(ScmInfo(url("https://github.com/zero-deps/glowing-succotash"), "scm:git@github.com:zero-deps/glowing-succotash.git"))
 ThisBuild / developers := Developer("tellnobody1", "Andrii Nemchenko", "a.nemchenko@icloud.com", url("https://github.com/tellnobody1")) :: Nil
 ThisBuild / licenses += "Unlicense" -> url("http://unlicense.org")
 ThisBuild / version := org.eclipse.jgit.api.Git.open(file(".")).describe().call()
@@ -11,6 +11,7 @@ ThisBuild / scalacOptions ++= Vector(
   "-Ywarn-unused:imports",
   "-language:experimental.macros",
 )
+ThisBuild / pomIncludeRepository := { _ => false }
 ThisBuild / publishMavenStyle := true
 ThisBuild / publishTo := Some(Opts.resolver.sonatypeStaging)
 ThisBuild / isSnapshot := true // override in local repo
