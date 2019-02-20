@@ -23,6 +23,7 @@ libraryDependencies += "com.github.zero-deps" %% "gs-meta" % "latest.integration
 ```
 
 ```scala
+import zd.gs.meta.Literals
 i"1'000'000"
 ```
 
@@ -37,6 +38,7 @@ libraryDependencies += "com.github.zero-deps" %% "gs-ops" % "latest.integration"
 ```
 
 ```scala
+import zd.gs.ops.Cast
 "".as[Any]
 ```
 
@@ -45,8 +47,13 @@ libraryDependencies += "com.github.zero-deps" %% "gs-ops" % "latest.integration"
 ```bash
 $ sbt
 > publishLocal
-> exit
-cd demo
-$ sbt
+> project demo
 > run
+```
+
+## Publish
+
+```bash
+$ sbt
+> sonatypeRelease
 ```
