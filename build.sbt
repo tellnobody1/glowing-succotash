@@ -8,6 +8,7 @@ ThisBuild / scalacOptions ++= Vector(
   "-Ywarn-unused:imports",
   "-language:experimental.macros",
 )
+ThisBuild / isSnapshot := true // override local artifacts
 
 lazy val root = project.in(file(".")).settings(
   skip in publish := true,
@@ -26,16 +27,18 @@ lazy val plug = project.in(file("plug")).settings(
   name := "gs-" + name.value,
 )
 
+// scalac -Xshow-phases
 lazy val demo = project.in(file("demo")).settings(
   scalaVersion := "2.12.8",
   scalacOptions ++= Vector(
     "-feature",
     "-deprecation",
-    // "-Ybrowse:refchecks",
+    // "-Ybrowse:typer",
   ),
   run / fork := true,
   Compile / run / mainClass := Some("Demo"),
-  libraryDependencies += "com.github.zero-deps" %% "gs-meta" % "latest.integration",
-  libraryDependencies += "com.github.zero-deps" %% "gs-ops" % "latest.integration",
-  libraryDependencies += compilerPlugin("com.github.zero-deps" %% "gs-plug" % "latest.integration"),
+  resolvers += Resolver.bintrayRepo("zero-deps", "maven"),
+  libraryDependencies += "io.github.zero-deps" %% "gs-meta" % "latest.integration",
+  libraryDependencies += "io.github.zero-deps" %% "gs-ops" % "latest.integration",
+  libraryDependencies += compilerPlugin("io.github.zero-deps" %% "gs-plug" % "latest.integration"),
 )

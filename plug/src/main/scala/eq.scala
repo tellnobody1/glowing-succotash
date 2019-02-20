@@ -11,7 +11,8 @@ class EqPlugin(override val global: Global) extends Plugin {
   class Component(val global: Global) extends PluginComponent {
     import global._
     val phaseName = "eq"
-    val runsAfter = List[String]("refchecks")
+    val runsAfter = List[String]("typer")
+    override val runsBefore = List[String]("patmat")
     def newPhase(prev: Phase): Phase = new StdPhase(prev) {
       override def apply(unit: CompilationUnit): Unit = {
         global.reporter.echo("Checking == and !=")

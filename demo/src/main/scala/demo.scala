@@ -13,6 +13,11 @@ object Demo extends App {
   val i: Int = 1
   val l: Long = 1
 
+  Option(1) match {
+    case Some(_) =>
+    case None => 
+  }
+
   // compiles:
   a == a   
   b1 == b2 
