@@ -2,25 +2,24 @@
 
 Compiler plugins/macros/ops for Scala.
 
+## Install
+
+```
+resolvers += Resolver.bintrayRepo("zero-deps", "maven")
+libraryDependencies += compilerPlugin("io.github.zero-deps" %% "gs-plug" % "latest.integration")
+libraryDependencies += "io.github.zero-deps" %% "gs-meta" % "latest.integration"
+libraryDependencies += "io.github.zero-deps" %% "gs-ops" % "latest.integration"
+```
+
 ## plug
 
 Restrict `==`/`!=` to compare only same types. 
-
-### Use
-
-```sbt
-addCompilerPlugin("com.github.zero-deps" %% "gs-plug" % "latest.integration")
-```
 
 ## meta
 
 Formatted integers.
 
 ### Use
-
-```sbt
-libraryDependencies += "com.github.zero-deps" %% "gs-meta" % "latest.integration"
-```
 
 ```scala
 import zd.gs.meta.Literals
@@ -33,13 +32,9 @@ Cast to superclass.
 
 ## Use
 
-```sbt
-libraryDependencies += "com.github.zero-deps" %% "gs-ops" % "latest.integration"
-```
-
 ```scala
 import zd.gs.ops.Cast
-"".as[Any]
+"any".as[Any]
 ```
 
 ## Demo
