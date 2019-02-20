@@ -18,9 +18,14 @@ class EqPlugin(override val global: Global) extends Plugin {
         global.reporter.echo("Checking == and !=")
         for (
           tree @ Apply(Select(l, op), List(r)) <- unit.body
-            if !(l.tpe.dealiasWiden =:= r.tpe.dealiasWiden) && (op == nme.EQ || op == nme.NE)
+          if !(l.tpe.dealiasWiden =:= r.tpe.dealiasWiden) && (op == nme.EQ || op == nme.NE)
         ) {
-          global.reporter.error(tree.pos, s"comparing ${l.tpe} with ${r.tpe}")
+          (l, r) match {
+            case (Literal(Constant(null)), _) =>
+            case (_, Literal(Constant(null))) =>
+            case _ =>
+              global.reporter.error(tree.pos, s"comparing ${l.tpe} with ${r.tpe}")
+          }
         }
       }
     }

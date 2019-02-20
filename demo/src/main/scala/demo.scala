@@ -2,14 +2,17 @@ import zd.gs.meta.Literals
 import zd.gs.ops.Cast
 
 object Demo extends App {
-  trait A
-  class B extends A
-  class C extends A
+  "" == null
+  null == ""
 
-  val a: A = new B
-  val b1: B = new B
-  val b2: B = new B
-  val c: C = new C
+  sealed trait A
+  final case class B() extends A
+  final case class C() extends A
+
+  val a: A = B()
+  val b1: B = B()
+  val b2: B = B()
+  val c: C = C()
   val i: Int = 1
   val l: Long = 1
 
