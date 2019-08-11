@@ -6,6 +6,7 @@ Compiler plugins/macros/ops for Scala.
 [![Bintray](https://img.shields.io/bintray/v/zero-deps/maven/gs-meta.svg?label=meta)](https://bintray.com/zero-deps/maven/gs-meta/_latestVersion)
 [![Bintray](https://img.shields.io/bintray/v/zero-deps/maven/gs-ops.svg?label=ops)](https://bintray.com/zero-deps/maven/gs-ops/_latestVersion)
 [![Bintray](https://img.shields.io/bintray/v/zero-deps/maven/gs-git.svg?label=git)](https://bintray.com/zero-deps/maven/gs-git/_latestVersion)
+[![Bintray](https://img.shields.io/bintray/v/zero-deps/maven/gs-z.svg?label=z)](https://bintray.com/zero-deps/maven/gs-z/_latestVersion)
 
 ## Install
 
