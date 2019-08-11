@@ -53,8 +53,6 @@ object Demo extends App {
   xs != ys // ko
   */
 
-  assert(i"1'000'000" == 1000000)
-
   // compiles:
   "".as[Any]
   // doesn't compile:

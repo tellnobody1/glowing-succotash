@@ -1,6 +1,6 @@
 package zd.gs
 
-object z {
+package object z {
   import scala.annotation.tailrec
   type Maybe[A] = Option[A]
   val Maybe = Option

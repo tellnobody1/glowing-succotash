@@ -17,6 +17,7 @@ lazy val root = project.in(file(".")).settings(
 
 lazy val meta = project.in(file("meta")).settings(
   libraryDependencies += "org.scala-lang" % "scala-reflect" % scalaVersion.value % Compile,
+  libraryDependencies += "org.scalatest" %% "scalatest" % "3.1.0-SNAP13" % Test,
   name := "gs-" + name.value,
 )
 lazy val ops = project.in(file("ops")).settings(
@@ -31,6 +32,7 @@ lazy val git = project.in(file("git")).settings(
   name := "gs-" + name.value,
 )
 lazy val z = project.in(file("z")).settings(
+  libraryDependencies += "org.scalatest" %% "scalatest" % "3.1.0-SNAP13" % Test,
   name := "gs-" + name.value,
 )
 
@@ -48,7 +50,6 @@ lazy val demo = project.in(file("demo")).settings(
   libraryDependencies += "io.github.zero-deps" %% "gs-meta" % "latest.integration",
   libraryDependencies += "io.github.zero-deps" %% "gs-ops" % "latest.integration",
   libraryDependencies += "io.github.zero-deps" %% "gs-git" % "latest.integration",
-  libraryDependencies += "io.github.zero-deps" %% "gs-z" % "latest.integration",
   libraryDependencies += "org.slf4j" % "slf4j-nop" % "latest.integration",
   libraryDependencies += compilerPlugin("io.github.zero-deps" %% "gs-plug" % "1.0.0-dirty"),
 )
