@@ -13,7 +13,7 @@ ThisBuild / isSnapshot := true // override local artifacts
 lazy val root = project.in(file(".")).settings(
   skip in publish := true,
   name := "gs-" + name.value,
-).aggregate(meta, ops, plug, git)
+).aggregate(meta, ops, plug, git, z)
 
 lazy val meta = project.in(file("meta")).settings(
   libraryDependencies += "org.scala-lang" % "scala-reflect" % scalaVersion.value % Compile,
@@ -28,6 +28,9 @@ lazy val plug = project.in(file("plug")).settings(
 )
 lazy val git = project.in(file("git")).settings(
   libraryDependencies += "org.eclipse.jgit" % "org.eclipse.jgit" % "latest.integration",
+  name := "gs-" + name.value,
+)
+lazy val z = project.in(file("z")).settings(
   name := "gs-" + name.value,
 )
 
@@ -45,6 +48,7 @@ lazy val demo = project.in(file("demo")).settings(
   libraryDependencies += "io.github.zero-deps" %% "gs-meta" % "latest.integration",
   libraryDependencies += "io.github.zero-deps" %% "gs-ops" % "latest.integration",
   libraryDependencies += "io.github.zero-deps" %% "gs-git" % "latest.integration",
+  libraryDependencies += "io.github.zero-deps" %% "gs-z" % "latest.integration",
   libraryDependencies += "org.slf4j" % "slf4j-nop" % "latest.integration",
   libraryDependencies += compilerPlugin("io.github.zero-deps" %% "gs-plug" % "1.0.0-dirty"),
 )
