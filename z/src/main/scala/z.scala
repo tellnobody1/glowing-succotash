@@ -60,10 +60,19 @@ package object z {
       case Right(r) => if (f(r)) x else Left(l)
       case Left(_) => x
     }
+    def bimap[L2,R2](l: L => L2)(r: R => R2): Either[L2,R2] = x match {
+      case Right(x) => r(x).right
+      case Left(x) => l(x).left
+    }
     def leftMap[L2](f: L => L2): Either[L2,R] = x match {
       case y@Right(_) => y.coerceLeft
       case Left(l) => Left(f(l))
     }
+    def orElse[L2](x: => Either[L2,R]): Either[L2,R] = x match {
+      case Left(_) => x
+      case y@Right(_) => y.coerceLeft
+    }
+    def void: Either[L,Unit] = x.map(_ => ())
   }
   implicit class Functor_Maybe[A,B](fn: Function1[A,B]) {
     def `<$>`(x: Maybe[A]): Maybe[B] = x match {
