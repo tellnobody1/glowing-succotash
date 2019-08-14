@@ -38,5 +38,12 @@ class zSpec extends AnyFreeSpec with Matchers {
     assert(f `<$>` 2.just <*> 3.just === Some(5))
     assert(f `<$>` 2.just <*> Nothing === Nothing)
   }
+  "apply is lazy" in {
+    var i = 0
+    def f: Int => Int => Int = x => y => x + y
+    def y: Maybe[Int] = { i = i + 1; 3.just }
+    assert(f `<$>` Nothing <*> y === Nothing)
+    assert(i === 0)
+  }
 }
 

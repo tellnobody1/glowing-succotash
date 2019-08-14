@@ -8,6 +8,12 @@ package object z {
   val Just = Some
   type Nothing = None.type
   val Nothing = None
+  implicit class OptionExt[A](x: Option[A]) {
+    final def cata[B](f: A => B, b: => B): B = x match {
+      case Some(a) => f(a)
+      case Nothing => b
+    }
+  }
   implicit class AnyExt[A](x: A) {
     def left[R]: Left[A,R] = Left(x)
     def right[L]: Right[L,A] = Right(x)
@@ -73,15 +79,19 @@ package object z {
       case y@Right(_) => y.coerceLeft
     }
     def void: Either[L,Unit] = x.map(_ => ())
+    def recover(pf: PartialFunction[L,R]): Either[L,R] = x match {
+      case Left(l) if pf isDefinedAt l => Right(pf(l))
+      case _ => x
+    }
   }
   implicit class Functor_Maybe[A,B](fn: Function1[A,B]) {
     def `<$>`(x: Maybe[A]): Maybe[B] = x match {
-      case Just(x) => Just(fn(x))
+      case Just(y) => Just(fn(y))
       case Nothing => Nothing
     }
   }
   implicit class Apply_Maybe[A,B](fn: Maybe[Function1[A,B]]) {
-    def <*>(x: Maybe[A]): Maybe[B] = fn match {
+    def <*>(x: => Maybe[A]): Maybe[B] = fn match {
       case Just(fn) => fn `<$>` x
       case Nothing => Nothing
     }
