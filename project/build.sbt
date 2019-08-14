@@ -4,3 +4,5 @@ libraryDependencies ++= Seq(
 )
 
 addSbtPlugin("org.foundweekends" % "sbt-bintray" % "latest.integration")
+
+resolvers += Resolver.jcenterRepo

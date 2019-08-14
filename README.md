@@ -11,7 +11,7 @@ Compiler plugins/macros/ops for Scala.
 ## Install
 
 ```
-resolvers += Resolver.bintrayRepo("zero-deps", "maven")
+resolvers += Resolver.jcenterRepo
 libraryDependencies += compilerPlugin("io.github.zero-deps" %% "gs-plug" % "latest.integration")
 libraryDependencies += "io.github.zero-deps" %% "gs-meta" % "latest.integration"
 libraryDependencies += "io.github.zero-deps" %% "gs-ops" % "latest.integration"

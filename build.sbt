@@ -9,6 +9,8 @@ ThisBuild / scalacOptions ++= Vector(
   "-language:experimental.macros",
 )
 ThisBuild / isSnapshot := true // override local artifacts
+ThisBuild / resolvers += Resolver.jcenterRepo
+ThisBuild / turbo := true
 
 lazy val root = project.in(file(".")).settings(
   skip in publish := true,
