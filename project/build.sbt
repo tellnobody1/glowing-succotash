@@ -3,6 +3,4 @@ libraryDependencies ++= Seq(
   "io.github.zero-deps" %% "gs-git" % "latest.integration",
 )
 
-addSbtPlugin("org.foundweekends" % "sbt-bintray" % "latest.integration")
-
 resolvers += Resolver.jcenterRepo
