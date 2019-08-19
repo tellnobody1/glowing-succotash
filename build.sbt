@@ -1,4 +1,4 @@
-ThisBuild / scalaVersion := "2.12.8"
+ThisBuild / scalaVersion := "2.13.0"
 ThisBuild / organization := "io.github.zero-deps"
 ThisBuild / licenses += "Unlicense" -> url("http://unlicense.org")
 ThisBuild / version := zd.gs.git.GitOps.version
@@ -53,5 +53,5 @@ lazy val demo = project.in(file("demo")).settings(
   libraryDependencies += "io.github.zero-deps" %% "gs-ops" % "latest.integration",
   libraryDependencies += "io.github.zero-deps" %% "gs-git" % "latest.integration",
   libraryDependencies += "org.slf4j" % "slf4j-nop" % "latest.integration",
-  libraryDependencies += compilerPlugin("io.github.zero-deps" %% "gs-plug" % "1.0.0-dirty"),
+  libraryDependencies += compilerPlugin("io.github.zero-deps" %% "gs-plug" % "latest.integration"),
 )
