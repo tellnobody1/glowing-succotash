@@ -30,6 +30,7 @@ lazy val plug = project.in(file("plug")).settings(
   name := "gs-" + name.value,
 )
 lazy val git = project.in(file("git")).settings(
+  scalaVersion := "2.12.9",
   libraryDependencies += "org.eclipse.jgit" % "org.eclipse.jgit" % "latest.integration",
   name := "gs-" + name.value,
 )
