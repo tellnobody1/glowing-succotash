@@ -40,6 +40,7 @@ lazy val z = project.in(file("z")).settings(
 
 // scalac -Xshow-phases
 lazy val demo = project.in(file("demo")).settings(
+  skip in publish := true,
   scalaVersion := "2.13.0",
   scalacOptions ++= Vector(
     "-feature",
@@ -49,9 +50,9 @@ lazy val demo = project.in(file("demo")).settings(
   run / fork := true,
   Compile / run / mainClass := Some("Demo"),
   resolvers += Resolver.bintrayRepo("zero-deps", "maven"),
-  libraryDependencies += "io.github.zero-deps" %% "gs-meta" % "1.4.4",
-  libraryDependencies += "io.github.zero-deps" %% "gs-git" % "1.4.4",
-  libraryDependencies += "io.github.zero-deps" %% "gs-z" % "1.4.4",
+  libraryDependencies += "io.github.zero-deps" %% "gs-meta" % "1.5.0",
+  libraryDependencies += "io.github.zero-deps" %% "gs-git" % "1.5.0",
+  libraryDependencies += "io.github.zero-deps" %% "gs-z" % "1.5.0",
   libraryDependencies += "org.slf4j" % "slf4j-nop" % "latest.integration",
-  libraryDependencies += compilerPlugin("io.github.zero-deps" %% "gs-plug" % "1.4.4"),
+  libraryDependencies += compilerPlugin("io.github.zero-deps" %% "gs-plug" % "1.5.0"),
 )
