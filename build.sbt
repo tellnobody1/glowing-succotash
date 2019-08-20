@@ -10,19 +10,19 @@ ThisBuild / scalacOptions ++= Vector(
 )
 ThisBuild / isSnapshot := true // override local artifacts
 ThisBuild / resolvers += Resolver.jcenterRepo
+
 ThisBuild / turbo := true
+ThisBuild / useCoursier := true
+Global / onChangedBuildSource := ReloadOnSourceChanges
 
 lazy val root = project.in(file(".")).settings(
   skip in publish := true,
   name := "gs-" + name.value,
-).aggregate(meta, ops, plug, git, z)
+).aggregate(meta, plug, git, z, demo)
 
 lazy val meta = project.in(file("meta")).settings(
   libraryDependencies += "org.scala-lang" % "scala-reflect" % scalaVersion.value % Compile,
   libraryDependencies += "org.scalatest" %% "scalatest" % "3.1.0-SNAP13" % Test,
-  name := "gs-" + name.value,
-)
-lazy val ops = project.in(file("ops")).settings(
   name := "gs-" + name.value,
 )
 lazy val plug = project.in(file("plug")).settings(
@@ -40,7 +40,7 @@ lazy val z = project.in(file("z")).settings(
 
 // scalac -Xshow-phases
 lazy val demo = project.in(file("demo")).settings(
-  scalaVersion := "2.12.8",
+  scalaVersion := "2.13.0",
   scalacOptions ++= Vector(
     "-feature",
     "-deprecation",
@@ -49,9 +49,9 @@ lazy val demo = project.in(file("demo")).settings(
   run / fork := true,
   Compile / run / mainClass := Some("Demo"),
   resolvers += Resolver.bintrayRepo("zero-deps", "maven"),
-  libraryDependencies += "io.github.zero-deps" %% "gs-meta" % "latest.integration",
-  libraryDependencies += "io.github.zero-deps" %% "gs-ops" % "latest.integration",
-  libraryDependencies += "io.github.zero-deps" %% "gs-git" % "latest.integration",
+  libraryDependencies += "io.github.zero-deps" %% "gs-meta" % "1.4.4",
+  libraryDependencies += "io.github.zero-deps" %% "gs-git" % "1.4.4",
+  libraryDependencies += "io.github.zero-deps" %% "gs-z" % "1.4.4",
   libraryDependencies += "org.slf4j" % "slf4j-nop" % "latest.integration",
-  libraryDependencies += compilerPlugin("io.github.zero-deps" %% "gs-plug" % "latest.integration"),
+  libraryDependencies += compilerPlugin("io.github.zero-deps" %% "gs-plug" % "1.4.4"),
 )

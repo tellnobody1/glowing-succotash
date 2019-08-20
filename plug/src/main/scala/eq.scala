@@ -11,8 +11,7 @@ class EqPlugin(override val global: Global) extends Plugin {
   class Component(val global: Global) extends PluginComponent {
     import global._
     import definitions.ArrayClass
-    import nme.EQ
-    import nme.NE
+    def filterOp(op: Name): Boolean = op == nme.EQ || op == nme.NE
     val phaseName = "eq"
     val runsAfter = List[String]("typer")
     override val runsBefore = List[String]("patmat")
@@ -22,13 +21,10 @@ class EqPlugin(override val global: Global) extends Plugin {
         unit.body.foreach {
           case Apply(Select(Literal(Constant(null)), op), List(r)) => // ok
           case Apply(Select(l, op), List(Literal(Constant(null)))) => // ok
-          case tree@Apply(Select(l, EQ), List(r)) if l.tpe.dealiasWiden.typeConstructor =:= ArrayClass.selfType.typeConstructor && r.tpe.dealiasWiden.typeConstructor =:= ArrayClass.selfType.typeConstructor =>
+          case tree@Apply(Select(l, op), List(r)) if filterOp(op) && l.tpe.dealiasWiden.typeConstructor =:= ArrayClass.selfType.typeConstructor && r.tpe.dealiasWiden.typeConstructor =:= ArrayClass.selfType.typeConstructor =>
             global.reporter.error(tree.pos, s"comparing ${l.tpe.dealiasWiden} with ${r.tpe.dealiasWiden}; use java.util.Arrays.equals(${if (l.symbol.asTerm.isStable) l.symbol.asTerm.name.toString else "_"}, ${if (r.symbol.asTerm.isStable) r.symbol.asTerm.name.toString else "_"}) instead")
-          case Apply(Select(l, EQ), List(r)) if l.tpe.dealiasWiden =:= r.tpe.dealiasWiden => // ok
-          case tree@Apply(Select(l, EQ), List(r)) =>
-            global.reporter.error(tree.pos, s"comparing ${l.tpe.dealiasWiden} with ${r.tpe.dealiasWiden}")
-          case Apply(Select(l, NE), List(r)) if l.tpe.dealiasWiden =:= r.tpe.dealiasWiden => // ok
-          case tree@Apply(Select(l, NE), List(r)) =>
+          case Apply(Select(l, op), List(r)) if filterOp(op) && l.tpe.dealiasWiden =:= r.tpe.dealiasWiden => // ok
+          case tree@Apply(Select(l, op), List(r)) if filterOp(op) =>
             global.reporter.error(tree.pos, s"comparing ${l.tpe.dealiasWiden} with ${r.tpe.dealiasWiden}")
           case _ => // skip
         }

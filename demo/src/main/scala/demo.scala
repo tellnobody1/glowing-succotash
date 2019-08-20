@@ -1,8 +1,9 @@
 import zd.gs.meta.Literals
-import zd.gs.ops.Cast
+import zd.gs.z.cast._
 
 object Demo extends App {
   println(zd.gs.git.GitOps.version(dir = ".."))
+  println(i"1'000'000")
 
   "" == null
   null == ""
@@ -22,19 +23,19 @@ object Demo extends App {
 
   Option(1) match {
     case Some(_) =>
-    case None => 
+    case None =>
   }
 
   // compiles:
-  a == a   
-  b1 == b2 
-  a == b1.as[A] 
-  a != a   
-  b1 != b2 
-  a != b1.as[A] 
-  i.toLong + 1 == l + 1 
-  i.toLong + 1 != l + 1 
-  1.toInt + 1.toLong == 2.toLong 
+  a == a
+  b1 == b2
+  a == b1.as[A]
+  a != a
+  b1 != b2
+  a != b1.as[A]
+  i.toLong + 1 == l + 1
+  i.toLong + 1 != l + 1
+  1.toInt + 1.toLong == 2.toLong
 
   // doesn't compile:
   /*

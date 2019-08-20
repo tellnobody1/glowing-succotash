@@ -1,8 +1,7 @@
-package zd.gs
+package zd.gs.z
 
-package object ops {
+object cast {
   implicit class Cast[A](a: A) {
     def as[B >: A]: B = a
   }
 }
-
