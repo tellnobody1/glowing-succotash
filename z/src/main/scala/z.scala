@@ -18,6 +18,7 @@ package object z {
     def left[R]: Left[A,R] = Left(x)
     def right[L]: Right[L,A] = Right(x)
     def just: Just[A] = Just(x)
+    def maybe: Maybe[A] = Maybe(x)
   }
   implicit class BooleanExt(x: Boolean) {
     def fold[A](t: => A, f: => A): A = {
