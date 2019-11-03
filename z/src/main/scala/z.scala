@@ -76,7 +76,7 @@ package object z {
       case Right(r) => if (f(r)) x else Left(l)
       case Left(_) => x
     }
-    def bimap[L2,R2](l: L => L2)(r: R => R2): Either[L2,R2] = x match {
+    def bimap[L2,R2](l: L => L2, r: R => R2): Either[L2,R2] = x match {
       case Right(x) => r(x).right
       case Left(x) => l(x).left
     }
