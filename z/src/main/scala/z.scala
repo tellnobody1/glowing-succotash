@@ -10,9 +10,18 @@ package object z {
   val Nothing = None
   def fromNullable[A](x: A): Maybe[A] = Option(x)
   implicit class OptionExt[A](x: Option[A]) {
-    final def cata[B](f: A => B, b: => B): B = x match {
-      case Some(a) => f(a)
+    def cata[B](f: A => B, b: => B): B = x match {
+      case Just(a) => f(a)
       case Nothing => b
+    }
+  }
+  implicit class OptionEitherExt[A,B](x: Option[Either[A,B]]) {
+    def sequence(): Either[A, Option[B]] = {
+      x match {
+        case Just(Right(y)) => y.just.right
+        case Just(Left(y)) => y.left
+        case Nothing => Nothing.right
+      }
     }
   }
   implicit class AnyExt[A](x: A) {
@@ -27,14 +36,14 @@ package object z {
   }
   implicit class SeqEitherExt[A,B](xs: Seq[Either[A, B]]) {
     @tailrec
-    private def _sequenceU(ys: Seq[Either[A, B]], acc: Vector[B]): Either[A, Vector[B]] = {
+    private def _sequence(ys: Seq[Either[A, B]], acc: Vector[B]): Either[A, Vector[B]] = {
       ys.headOption match {
         case None => Right(acc)
         case Some(l@Left(_)) => l.coerceRight
-        case Some(Right(z)) => _sequenceU(ys.tail, acc :+ z)
+        case Some(Right(z)) => _sequence(ys.tail, acc :+ z)
       }
     }
-    def sequenceU: Either[A, Vector[B]] = _sequenceU(xs, Vector.empty)
+    def sequence(): Either[A, Vector[B]] = _sequence(xs, Vector.empty)
     @tailrec
     private def _sequence_(ys: Seq[Either[A, B]]): Either[A, Unit] = {
       ys.headOption match {
@@ -43,18 +52,18 @@ package object z {
         case Some(Right(z)) => _sequence_(ys.tail)
       }
     }
-    def sequence_ : Either[A, Unit] = _sequence_(xs)
+    def sequence_(): Either[A, Unit] = _sequence_(xs)
   }
   implicit class ListOptionExt[A](xs: List[Option[A]]) {
     @tailrec
-    private def _sequenceU(ys: List[Option[A]], acc: Vector[A]): Option[List[A]] = {
+    private def _sequence(ys: List[Option[A]], acc: Vector[A]): Option[List[A]] = {
       ys match {
         case Nil => Some(acc.toList)
         case None :: zs => None 
-        case Some(z) :: zs => _sequenceU(zs, acc :+ z)
+        case Some(z) :: zs => _sequence(zs, acc :+ z)
       }
     }
-    def sequenceU: Option[List[A]] = _sequenceU(xs, Vector.empty)
+    def sequence: Option[List[A]] = _sequence(xs, Vector.empty)
   }
   implicit class LeftExt[L,R](x: Left[L,R]) {
     def coerceRight[R2]: Either[L,R2] = x.asInstanceOf[Either[L,R2]]
