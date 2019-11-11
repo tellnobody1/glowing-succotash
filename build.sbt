@@ -50,7 +50,6 @@ lazy val demo = project.in(file("demo")).settings(
   ),
   run / fork := true,
   Compile / run / mainClass := Some("Demo"),
-  resolvers += Resolver.bintrayRepo("zero-deps", "maven"),
   libraryDependencies += "io.github.zero-deps" %% "gs-meta" % "1.5.0",
   libraryDependencies += "io.github.zero-deps" %% "gs-git" % "1.5.0",
   libraryDependencies += "io.github.zero-deps" %% "gs-z" % "1.5.0",
