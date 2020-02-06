@@ -14,6 +14,7 @@ package object z {
       case Just(a) => f(a)
       case Nothing => b
     }
+    def void: Option[Unit] = x.map(_ => ())
   }
   implicit class OptionEitherExt[A,B](x: Option[Either[A,B]]) {
     def sequence(): Either[A, Option[B]] = {
