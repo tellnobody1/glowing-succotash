@@ -1,8 +1,8 @@
-package zd.gs.git
+package zero.ext
 
 import java.io.File
 
-object GitOps {
+object git {
   def version: String = version()
 
   def version(dir: String = ".", tags: Boolean = false, stripPrefix: String = "v"): String = {

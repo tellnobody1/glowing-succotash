@@ -1,4 +1,4 @@
-ThisBuild / scalaVersion := "2.13.1"
+ThisBuild / scalaVersion := "2.13.2"
 ThisBuild / organization := "io.github.zero-deps"
 ThisBuild / licenses += "Unlicense" -> url("http://unlicense.org")
 ThisBuild / version := zd.gs.git.GitOps.version
@@ -9,40 +9,31 @@ ThisBuild / scalacOptions ++= Vector(
   "-language:experimental.macros",
 )
 ThisBuild / isSnapshot := true // override local artifacts
-ThisBuild / resolvers += Resolver.jcenterRepo
+ThisBuild / resolvers += Resolver.bintrayRepo("zero-deps", "maven")
 
 ThisBuild / turbo := true
 ThisBuild / useCoursier := true
 Global / onChangedBuildSource := ReloadOnSourceChanges
 
-lazy val root = project.in(file(".")).settings(
-  skip in publish := true,
-  name := s"gs-${name.value}",
-).aggregate(meta, plug, git, z)
-
-lazy val meta = project.in(file("meta")).settings(
+lazy val ext = project.in(file(".")).settings(
   libraryDependencies += "org.scala-lang" % "scala-reflect" % scalaVersion.value % Compile,
   libraryDependencies += "org.scalatest" %% "scalatest" % "3.1.0-SNAP13" % Test,
-  name := s"gs-${name.value}",
-)
+).aggregate(plug, git, demo)
+
 lazy val plug = project.in(file("plug")).settings(
   libraryDependencies += "org.scala-lang" % "scala-compiler" % scalaVersion.value % Provided,
-  name := s"gs-${name.value}",
+  name := s"ext-${name.value}",
 )
 lazy val git = project.in(file("git")).settings(
-  scalaVersion := "2.12.9",
+  scalaVersion := "2.12.11",
   libraryDependencies += "org.eclipse.jgit" % "org.eclipse.jgit" % "latest.integration",
-  name := s"gs-${name.value}",
-)
-lazy val z = project.in(file("z")).settings(
-  libraryDependencies += "org.scalatest" %% "scalatest" % "3.1.0-SNAP13" % Test,
-  name := s"gs-${name.value}",
+  name := s"ext-${name.value}",
 )
 
 // scalac -Xshow-phases
 lazy val demo = project.in(file("demo")).settings(
   skip in publish := true,
-  scalaVersion := "2.13.0",
+  scalaVersion := "2.13.2",
   scalacOptions ++= Vector(
     "-feature",
     "-deprecation",
@@ -50,9 +41,8 @@ lazy val demo = project.in(file("demo")).settings(
   ),
   run / fork := true,
   Compile / run / mainClass := Some("Demo"),
-  libraryDependencies += "io.github.zero-deps" %% "gs-meta" % "1.5.0",
-  libraryDependencies += "io.github.zero-deps" %% "gs-git" % "1.5.0",
-  libraryDependencies += "io.github.zero-deps" %% "gs-z" % "1.5.0",
+  libraryDependencies += "io.github.zero-deps" % "ext-git_2.12" % "1.7.0-dirty",
+  libraryDependencies += "io.github.zero-deps" %% "ext" % "1.7.0-dirty",
   libraryDependencies += "org.slf4j" % "slf4j-nop" % "latest.integration",
-  libraryDependencies += compilerPlugin("io.github.zero-deps" %% "gs-plug" % "1.5.0"),
+  libraryDependencies += compilerPlugin("io.github.zero-deps" %% "ext-plug" % "1.7.0-dirty"),
 )

@@ -1,4 +1,6 @@
-package zd.gs.z
+package zero.ext
+
+import either._
 
 object validate {
   def of7[L,A1,A2,A3,A4,A5,A6,A7,B](a1: Either[L,A1], a2: Either[L,A2], a3: Either[L,A3], a4: Either[L,A4], a5: Either[L,A5], a6: Either[L,A6], a7: Either[L,A7])(f: (A1,A2,A3,A4,A5,A6,A7) => B): Either[Vector[L],B] = {

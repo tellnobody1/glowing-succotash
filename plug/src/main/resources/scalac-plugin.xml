@@ -1,4 +1,4 @@
 <plugin>
   <name>eq</name>
-  <classname>zd.gs.plug.EqPlugin</classname>
+  <classname>zero.ext.Equality</classname>
 </plugin>

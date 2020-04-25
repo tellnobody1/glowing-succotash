@@ -1,8 +1,7 @@
-import zd.gs.meta.Literals
-import zd.gs.z.cast._
+import zero.ext._, int._, cast._, git.version
 
 object Demo extends App {
-  println(zd.gs.git.GitOps.version(dir = ".."))
+  println(version(dir = ".."))
   println(i"1'000'000")
 
   "" == null

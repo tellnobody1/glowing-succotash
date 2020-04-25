@@ -1,9 +1,9 @@
-package zd.gs.plug
+package zero.ext
 
 import scala.tools.nsc.{Global, Phase}
 import scala.tools.nsc.plugins.{Plugin, PluginComponent}
 
-class EqPlugin(override val global: Global) extends Plugin {
+class Equality(override val global: Global) extends Plugin {
   override val name = "eq"
   override val description = "equals only for same type"
   override val components = List[PluginComponent](new Component(global))
@@ -17,7 +17,7 @@ class EqPlugin(override val global: Global) extends Plugin {
     override val runsBefore = List[String]("patmat")
     def newPhase(prev: Phase): Phase = new StdPhase(prev) {
       override def apply(unit: CompilationUnit): Unit = {
-        global.reporter.echo("Checking == and !=")
+        //global.reporter.echo("Checking == and !=")
         unit.body.foreach {
           case Apply(Select(Literal(Constant(null)), op), List(r)) => // ok
           case Apply(Select(l, op), List(Literal(Constant(null)))) => // ok
