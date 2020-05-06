@@ -1,7 +1,10 @@
-package zd.gs.z
+package zero.ext
+package validation
 
 import org.scalatest.freespec.AnyFreeSpec
 import org.scalatest.Matchers
+
+import either._
 
 class validateSpec extends AnyFreeSpec with Matchers {
   "of7" in {

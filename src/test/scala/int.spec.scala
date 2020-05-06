@@ -1,4 +1,4 @@
-package zd.gs.meta
+package zero.ext.int
 
 import org.scalatest.freespec.AnyFreeSpec
 
