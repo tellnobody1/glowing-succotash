@@ -40,9 +40,8 @@ lazy val demo = project.in(file("demo")).settings(
     // "-Ybrowse:typer",
   ),
   run / fork := true,
-  Compile / run / mainClass := Some("Demo"),
-  libraryDependencies += "io.github.zero-deps" % "ext-git_2.12" % "1.7.0-dirty",
-  libraryDependencies += "io.github.zero-deps" %% "ext" % "1.7.0-dirty",
+  libraryDependencies += "io.github.zero-deps" % "ext-git_2.12" % "2.1",
+  libraryDependencies += "io.github.zero-deps" %% "ext" % "2.1",
   libraryDependencies += "org.slf4j" % "slf4j-nop" % "latest.integration",
-  libraryDependencies += compilerPlugin("io.github.zero-deps" %% "ext-plug" % "1.7.0-dirty"),
+  libraryDependencies += compilerPlugin("io.github.zero-deps" %% "ext-plug" % "2.1"),
 )

@@ -22,4 +22,3 @@ class TraverseSpec extends AnyFreeSpec with Matchers {
     List(1.some,2.some,3.some).sequence shouldBe Some(Seq(1, 2, 3))
   }
 }
-

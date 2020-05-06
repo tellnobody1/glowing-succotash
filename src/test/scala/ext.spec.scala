@@ -26,19 +26,20 @@ class extSpec extends AnyFreeSpec with Matchers {
     assert(Right[Int,Int](0).leftMap(_ + 1) === Right(0))
     Left(0).orElse(Right(1)) shouldBe (Right(1))
   }
-  "apply" in {
+  "cat" - {
     import cat._, option._
-    def f: Int => Int => Int = x => y => x + y
-    assert(f `<$>` 2.some <*> 3.some === Some(5))
-    assert(f `<$>` 2.some <*> None === None)
-  }
-  "apply is lazy" in {
-    import cat._, option._
-    var i = 0
-    def f: Int => Int => Int = x => y => x + y
-    def y: Option[Int] = { i = i + 1; 3.some }
-    assert(f `<$>` None <*> y === None)
-    assert(i === 0)
+    "apply" in {
+      def f: Int => Int => Int = x => y => x + y
+      assert(f `<$>` 2.some <*> 3.some === Some(5))
+      assert(f `<$>` 2.some <*> None === None)
+    }
+    "apply is lazy" in {
+      var i = 0
+      def f: Int => Int => Int = x => y => x + y
+      def y: Option[Int] = { i = i + 1; 3.some }
+      assert(f `<$>` None <*> y === None)
+      assert(i === 0)
+    }
   }
 }
 

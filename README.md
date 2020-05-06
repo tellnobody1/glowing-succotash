@@ -2,70 +2,53 @@
 
 Compiler plugins/macros/ops for Scala.
 
-[![Bintray](https://img.shields.io/bintray/v/zero-deps/maven/gs-plug.svg?label=plug)](https://bintray.com/zero-deps/maven/gs-plug/_latestVersion)
-[![Bintray](https://img.shields.io/bintray/v/zero-deps/maven/gs-meta.svg?label=meta)](https://bintray.com/zero-deps/maven/gs-meta/_latestVersion)
-[![Bintray](https://img.shields.io/bintray/v/zero-deps/maven/gs-git.svg?label=git)](https://bintray.com/zero-deps/maven/gs-git/_latestVersion)
-[![Bintray](https://img.shields.io/bintray/v/zero-deps/maven/gs-z.svg?label=z)](https://bintray.com/zero-deps/maven/gs-z/_latestVersion)
-
-## Install
-
-```
-resolvers += Resolver.jcenterRepo
-libraryDependencies += compilerPlugin("io.github.zero-deps" %% "gs-plug" % "latest.integration")
-libraryDependencies += "io.github.zero-deps" %% "gs-meta" % "latest.integration"
-libraryDependencies += "io.github.zero-deps" %% "gs-z" % "latest.integration"
-libraryDependencies += "io.github.zero-deps" %% "gs-git" % "latest.integration"
-```
+[![Bintray](https://img.shields.io/bintray/v/zero-deps/maven/ext-plug.svg?label=ext-plug)](https://bintray.com/zero-deps/maven/ext-plug/_latestVersion)
+[![Bintray](https://img.shields.io/bintray/v/zero-deps/maven/ext-git.svg?label=ext-git)](https://bintray.com/zero-deps/maven/ext-git/_latestVersion)
+[![Bintray](https://img.shields.io/bintray/v/zero-deps/maven/ext.svg?label=ext)](https://bintray.com/zero-deps/maven/ext/_latestVersion)
 
 ## Projects
 
-### plug
+### ext-plug
 
 Restrict `==`/`!=` to compare same types and forbid compare arrays.
 
-### meta
+See `demo/src/main/scala/plug.demo.scala` for details.
 
-```scala
-import zd.gs.meta.Literals
-i"1'000'000" // allow ' as thousand separator
+```
+resolvers += Resolver.jcenterRepo
+libraryDependencies += compilerPlugin("io.github.zero-deps" %% "ext-plug" % "latest.integration")
 ```
 
-### git
+### ext-git
 
 ```scala
-import zd.gs.git.GitOps
-GitOps.version // version based on git-describe
+import zero.ext._
+git.version // version based on git-describe
 ```
 
-### z
-
-```scala
-import zd.gs.z._
-// check z/src/test/scala/z.scala for examples
+```
+libraryDependencies += "io.github.zero-deps" %% "ext-git" % "latest.integration"
 ```
 
-```scala
-import zd.gs.z.validate._
-// check z/src/test/scala/validate.scala for examples
-```
+### ext
 
 ```scala
-import zd.gs.z.cast._
-"any".as[Any]
+import zero.ext._, boolean._, cast._, cat._, either._, int._, option._, traverse._, validate._
+// see src/main and src/test for details
+```
+
+```
+libraryDependencies += "io.github.zero-deps" %% "ext" % "latest.integration"
 ```
 
 ## Demo
 
-```bash
-sbt
-publishLocal
-project demo
-run
+```
+sbt 'project demo' run
 ```
 
 ## Publish
 
-```bash
-sbt
-publish
+```
+sbt publish
 ```
