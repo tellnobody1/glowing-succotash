@@ -45,16 +45,15 @@ package object traverse {
     def sequence: Option[List[A]] = _sequence(xs, Vector.empty)
   }
 
-  implicit class MapTraverseExt[A, B, K, E](xs: Map[K, A]) {
-    @tailrec private def _traverse(f: A => Either[E, B], ys: Map[K, A], acc: Map[K, B]): Either[E, Map[K, B]] = {
-      ys.headOption match {
-        case Some((k,v)) => f(v) match {
-          case Right(fv) => _traverse(f, ys.tail, acc + (k->fv))
-          case l@Left(_) => l.coerceRight
-        }
-        case None => acc.right
+  implicit class MapSequenceExt[K, V, E](xs: Map[K, Either[E, V]]) {
+    import collection.mutable
+    @tailrec private def _sequence(rem: Map[K, Either[E, V]], acc: mutable.Map[K, V]): Either[E, Map[K, V]] = {
+      rem.headOption match {
+        case Some((k, Right(v))) => _sequence(rem.tail, acc += (k->v))
+        case Some((k, l@Left(_))) => l.coerceRight
+        case None => acc.to(Map).right
       }
     }
-    def traverse(f: A => Either[E, B]): Either[E, Map[K, B]] = _traverse(f, xs, Map.empty)
+    def sequence(): Either[E, Map[K, V]] = _sequence(xs, mutable.Map.empty)
   }
 }
