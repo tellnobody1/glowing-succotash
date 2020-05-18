@@ -15,6 +15,7 @@ package object either {
   }
 
   implicit class EitherExt[L,R](x: Either[L,R]) {
+    def map_[U](f: R => U): Unit = x.foreach(f)
     def ensure(l: => L)(f: R => Boolean): Either[L,R] = x match {
       case Right(r) => if (f(r)) x else Left(l)
       case Left(_) => x
