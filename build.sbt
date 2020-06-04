@@ -27,6 +27,7 @@ lazy val plug = project.in(file("plug")).settings(
 lazy val git = project.in(file("git")).settings(
   scalaVersion := "2.12.11",
   libraryDependencies += "org.eclipse.jgit" % "org.eclipse.jgit" % "latest.integration",
+  libraryDependencies += "org.scalatest" %% "scalatest" % "3.1.0-SNAP13" % Test,
   name := s"ext-${name.value}",
 )
 
