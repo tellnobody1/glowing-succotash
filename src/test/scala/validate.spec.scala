@@ -6,7 +6,7 @@ import org.scalatest.Matchers
 
 import either._
 
-class validateSpec extends AnyFreeSpec with Matchers {
+class ValidateSpec extends AnyFreeSpec with Matchers {
   "of7" in {
     val a: Either[String, Int] = 2.right
     validate.of7 (a, a, a, a, a, a, a) {

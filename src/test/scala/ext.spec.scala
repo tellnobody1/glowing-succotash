@@ -3,7 +3,7 @@ package zero.ext
 import org.scalatest.freespec.AnyFreeSpec
 import org.scalatest.Matchers
 
-class extSpec extends AnyFreeSpec with Matchers {
+class OtherSpec extends AnyFreeSpec with Matchers {
   "option" in {
     import option._
     val _1: Some[Int] = 0.some
