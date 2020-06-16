@@ -13,7 +13,7 @@ object git {
       val x = desc.getOrElse(repo.newObjectReader.abbreviate(repo.resolve("HEAD")).name)
       if (dotted) x.replace('-','.') else x
     }
-    val dirty = if (git.status.call.isClean) "" else "-dirty"
+    val dirty = if (git.status.call.getUncommittedChanges.isEmpty) "" else "-dirty"
     base + dirty
   }
 }
