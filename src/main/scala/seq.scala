@@ -2,7 +2,7 @@ package zero.ext
 
 import option._
 
-package collection {
+package seq {
   trait HeadAccess[+A] {
     val head: Option[A]
     val tail: Option[HeadAccess[A]]
@@ -13,7 +13,7 @@ package collection {
 }
 
 package object list {
-  sealed trait LList[+A] extends collection.HeadAccess[A] {
+  sealed trait LList[+A] extends seq.HeadAccess[A] {
     def ::[B >: A](x: B): LList[B] = new ::[B](x, this)
   }
   final case object LNil extends LList[Nothing] {
@@ -27,7 +27,7 @@ package object list {
 }
 
 package object arrayview {
-  sealed trait ByteArrayView extends collection.RandomAccess[Byte] {
+  sealed trait ByteArrayView extends seq.RandomAccess[Byte] {
     val isEmpty: Boolean = !nonEmpty
     val nonEmpty: Boolean = !isEmpty
   }

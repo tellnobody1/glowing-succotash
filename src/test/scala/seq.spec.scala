@@ -5,7 +5,7 @@ import org.scalatest.Matchers
 
 import option._
 
-class CollectionSpec extends AnyFreeSpec with Matchers {
+class SeqSpec extends AnyFreeSpec with Matchers {
   "list" - {
     import list._
     "constructor" in {
