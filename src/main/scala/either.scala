@@ -37,5 +37,9 @@ package object either {
       case Left(l) if pf isDefinedAt l => Right(pf(l))
       case _ => x
     }
+    def tap[U](f: R => U): Either[L, R] = x.map{r =>
+      f(r)
+      r
+    }
   }
 }

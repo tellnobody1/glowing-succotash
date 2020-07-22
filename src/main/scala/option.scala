@@ -16,5 +16,9 @@ package object option {
       case None => b
     }
     def void: Option[Unit] = x.map(_ => ())
+    def tap[U](f: A => U): Option[A] = x.map{r =>
+      f(r)
+      r
+    }
   }
 }

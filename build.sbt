@@ -1,4 +1,4 @@
-ThisBuild / scalaVersion := "2.13.2"
+ThisBuild / scalaVersion := "2.13.3"
 ThisBuild / organization := "io.github.zero-deps"
 ThisBuild / licenses += "Unlicense" -> url("http://unlicense.org")
 ThisBuild / version := zd.gs.git.GitOps.version
