@@ -1,7 +1,7 @@
 ThisBuild / scalaVersion := "2.13.3"
 ThisBuild / organization := "io.github.zero-deps"
 ThisBuild / licenses += "Unlicense" -> url("http://unlicense.org")
-ThisBuild / version := zd.gs.git.GitOps.version
+ThisBuild / version := zero.ext.git.version
 ThisBuild / scalacOptions ++= Vector(
   "-feature",
   "-deprecation",
