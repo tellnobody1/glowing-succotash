@@ -1,4 +1,4 @@
-# glowing-succotash
+# ext-scala
 
 Compiler plugins/macros/ops for Scala.
 
