@@ -1,10 +1,8 @@
-# ext-scala
+# ext
+
+![ci](https://github.com/zero-deps/ext/workflows/ci/badge.svg)
 
 Compiler plugins/macros/ops for Scala.
-
-[![Bintray](https://img.shields.io/bintray/v/zero-deps/maven/ext-plug.svg?label=ext-plug)](https://bintray.com/zero-deps/maven/ext-plug/_latestVersion)
-[![Bintray](https://img.shields.io/bintray/v/zero-deps/maven/ext-git.svg?label=ext-git)](https://bintray.com/zero-deps/maven/ext-git/_latestVersion)
-[![Bintray](https://img.shields.io/bintray/v/zero-deps/maven/ext.svg?label=ext)](https://bintray.com/zero-deps/maven/ext/_latestVersion)
 
 ## Projects
 
@@ -15,7 +13,6 @@ Restrict `==`/`!=` to compare same types and forbid compare arrays.
 See `demo/src/main/scala/plug.demo.scala` for details.
 
 ```
-resolvers += Resolver.jcenterRepo
 libraryDependencies += compilerPlugin("io.github.zero-deps" %% "ext-plug" % "latest.integration")
 ```
 
@@ -47,8 +44,3 @@ libraryDependencies += "io.github.zero-deps" %% "ext" % "latest.integration"
 sbt 'project demo' run
 ```
 
-## Publish
-
-```
-sbt publish
-```

@@ -1,6 +1,7 @@
 ThisBuild / scalaVersion := "2.13.3"
+ThisBuild / githubOwner := "zero-deps"
+ThisBuild / githubRepository := "ext"
 ThisBuild / organization := "io.github.zero-deps"
-ThisBuild / licenses += "Unlicense" -> url("http://unlicense.org")
 ThisBuild / version := zero.ext.git.version
 ThisBuild / scalacOptions ++= Vector(
   "-feature",
