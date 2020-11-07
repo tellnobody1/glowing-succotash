@@ -10,7 +10,7 @@ import org.scalatest.Matchers
 class GitSpec extends AnyFreeSpec with Matchers {
   type Res = Either[String, Int]
 
-  "version" ignore {
+  "version" in {
     val expected = "git describe --dirty".!!.trim.replaceAll(raw"-(\d+)-g", ".$1.g")
     git.version shouldBe expected
   }
