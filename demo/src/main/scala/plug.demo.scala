@@ -1,5 +1,8 @@
 import zero.ext._, cast._
 
+case class Name(name: String) // ok
+// case class XS(array: Array[Byte]) // not ok
+
 object PlugDemo extends App {
   // compiles:
   "" == null
@@ -56,9 +59,16 @@ object PlugDemo extends App {
   // Array[Byte]() == xs
   // xs == ys
   // xs != ys
+  // 1.toByte == 1.toLong
 
   // compiles:
   "".as[Any]
   // doesn't compile:
   // 1.as[Long]
+
+  // side effect:
+  1 == "".as[Any]
+  // comparison with Any is allowed
+  // subject to change in the future
+
 }

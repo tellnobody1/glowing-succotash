@@ -5,7 +5,7 @@ import option._, either._
 
 package object traverse {
   implicit class OptionEitherSequenceExt[A,B](x: Option[Either[A,B]]) {
-    def sequence(): Either[A, Option[B]] = {
+    def sequence: Either[A, Option[B]] = {
       x match {
         case Some(Right(y)) => y.some.right
         case Some(Left(y)) => y.left
@@ -22,7 +22,7 @@ package object traverse {
         case Some(Right(z)) => _sequence(ys.tail, acc :+ z)
       }
     }
-    def sequence(): Either[A, Vector[B]] = _sequence(xs, Vector.empty)
+    def sequence: Either[A, Vector[B]] = _sequence(xs, Vector.empty)
 
     @tailrec private def _sequence_(ys: Seq[Either[A, B]]): Either[A, Unit] = {
       ys.headOption match {
@@ -31,7 +31,7 @@ package object traverse {
         case Some(Right(z)) => _sequence_(ys.tail)
       }
     }
-    def sequence_(): Either[A, Unit] = _sequence_(xs)
+    def sequence_ : Either[A, Unit] = _sequence_(xs)
   }
 
   implicit class ListOptionSequenceExt[A](xs: List[Option[A]]) {
@@ -54,6 +54,6 @@ package object traverse {
         case None => acc.to(Map).right
       }
     }
-    def sequence(): Either[E, Map[K, V]] = _sequence(xs, mutable.Map.empty)
+    def sequence: Either[E, Map[K, V]] = _sequence(xs, mutable.Map.empty)
   }
 }
