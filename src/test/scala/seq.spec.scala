@@ -32,6 +32,7 @@ class SeqSpec extends AnyFreeSpec with Matchers {
       "matching" in {
         unsafeWrap("hello".getBytes) match {
           case 'h' +# xs => xs shouldBe unsafeWrap("ello".getBytes)
+          case _ => fail()
         }
       }
     }

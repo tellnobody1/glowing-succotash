@@ -18,7 +18,7 @@ Global / onChangedBuildSource := ReloadOnSourceChanges
 lazy val ext = project.in(file(".")).settings(
   libraryDependencies += "org.scala-lang" % "scala-reflect" % scalaVersion.value % Compile,
   libraryDependencies += "org.scalatest" %% "scalatest" % "3.1.0-SNAP13" % Test,
-).aggregate(plug, bld)
+).aggregate(plug, bld, demo)
 
 lazy val plug = project.in(file("plug")).settings(
   libraryDependencies += "org.scala-lang" % "scala-compiler" % scalaVersion.value % Provided,

@@ -3,8 +3,8 @@ package zero.ext.nat
 final class Nat private (val i: Int) extends AnyVal {
   def +(n: Nat): Nat = Nat.of(i+n.i)
   def -(n: Nat): Nat = Nat.of(i-n.i)
-  def increment(): Nat = Nat.of(i+1)
-  def decrement(): Nat = Nat.of(i-1)
+  def increment: Nat = Nat.of(i+1)
+  def decrement: Nat = Nat.of(i-1)
   def *(n: Nat): Nat = Nat.of(i*n.i)
 }
 
