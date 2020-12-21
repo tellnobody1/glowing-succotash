@@ -27,17 +27,19 @@ class OtherSpec extends AnyFreeSpec with Matchers {
     Left(0).orElse(Right(1)) shouldBe (Right(1))
   }
   "cat" - {
-    import cat._, option._
+    import option.cat._, option._
     "apply" in {
       def f: Int => Int => Int = x => y => x + y
-      assert(f `<$>` 2.some <*> 3.some === Some(5))
-      assert(f `<$>` 2.some <*> None === None)
+      assert(f `<$>` 2.some <*> 3.some === 5.some)
+      assert(lift2 (f) (2.some) (3.some) === 5.some)
+      assert(f `<$>` 2.some <*> none === none)
+      assert(lift2 (f) (2.some) (none) === none)
     }
     "apply is lazy" in {
       var i = 0
       def f: Int => Int => Int = x => y => x + y
       def y: Option[Int] = { i = i + 1; 3.some }
-      assert(f `<$>` None <*> y === None)
+      assert(f `<$>` none <*> y === none)
       assert(i === 0)
     }
   }

@@ -1,17 +1,18 @@
-package zero.ext
+package zero.ext.option
 
 package object cat {
-  implicit class Functor_Maybe[A,B](fn: Function1[A,B]) {
-    def `<$>`(x: Option[A]): Option[B] = x match {
-      case Some(y) => Some(fn(y))
-      case None => None
-    }
+  type F[A] = Option[A]
+
+  implicit class Functor[A,B](fn: Function1[A,B]) {
+    // (a -> b) -> f a -> f b
+    def `<$>`(x: F[A]): F[B] = x.map(fn)
   }
 
-  implicit class Apply_Maybe[A,B](fn: Option[Function1[A,B]]) {
-    def <*>(x: => Option[A]): Option[B] = fn match {
-      case Some(fn) => fn `<$>` x
-      case None => None
-    }
+  implicit class Apply[A,B](fn: F[Function1[A,B]]) {
+    // f (a -> b) -> f a -> f b
+    def <*>(x: => F[A]): F[B] = fn.flatMap(_ `<$>` x)
   }
+
+  // (a -> b -> c) -> f a -> f b -> f c
+  def lift2[A,B,C](f: A=>B=>C)(a: =>F[A])(b: =>F[B]): F[C] = f `<$>` a <*> b
 }
