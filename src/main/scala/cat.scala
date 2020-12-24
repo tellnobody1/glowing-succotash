@@ -1,18 +1,15 @@
 package zero.ext.option
 
-package object cat {
+package object cat:
   type F[A] = Option[A]
 
-  implicit class Functor[A,B](fn: Function1[A,B]) {
+  implicit class Functor[A,B](fn: Function1[A,B]):
     // (a -> b) -> f a -> f b
-    def `<$>`(x: F[A]): F[B] = x.map(fn)
-  }
+    inline def `<$>`(x: F[A]): F[B] = x.map(fn)
 
-  implicit class Apply[A,B](fn: F[Function1[A,B]]) {
+  implicit class Apply[A,B](fn: F[Function1[A,B]]):
     // f (a -> b) -> f a -> f b
-    def <*>(x: => F[A]): F[B] = fn.flatMap(_ `<$>` x)
-  }
+    inline def <*>(x: => F[A]): F[B] = fn.flatMap(_ `<$>` x)
 
   // (a -> b -> c) -> f a -> f b -> f c
-  def lift2[A,B,C](f: A=>B=>C)(a: =>F[A])(b: =>F[B]): F[C] = f `<$>` a <*> b
-}
+  inline def lift2[A,B,C](f: A=>B=>C)(a: =>F[A])(b: =>F[B]): F[C] = f `<$>` a <*> b

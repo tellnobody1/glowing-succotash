@@ -1,41 +1,35 @@
 package zero.ext
 
-import org.scalatest.freespec.AnyFreeSpec
-import org.scalatest.Matchers
-
+import zio.test._, Assertion._
 import option._
 
-class SeqSpec extends AnyFreeSpec with Matchers {
-  "list" - {
-    import list._
-    "constructor" in {
+object SeqSpec extends DefaultRunnableSpec:
+  def spec = suite("SeqSpec")(
+    test("list: constructor") {
+      import list._
       val xs: LList[Int] = ::(1, ::(2, LNil))
       val ys: LList[Int] = 1 :: 2 :: LNil
-      xs shouldBe ys
+      assert(xs)(equalTo(ys))
     }
-    "head/tail" in {
+  , test("list: head/tail") {
+      import list._
       val xs: LList[Int] = 1 :: 2 :: LNil
-      xs.head shouldBe 1.some
-      xs.tail shouldBe (2 :: LNil).some
-      xs.tail.flatMap(_.tail).flatMap(_.head) shouldBe none
+      assert(xs.head)(equalTo(1.some))
+      && assert(xs.tail)(equalTo((2 :: LNil).some))
+      && assert(xs.tail.flatMap(_.tail).flatMap(_.head))(equalTo(none))
     }
-    "matching" in {
-      ((1 :: 2 :: LNil) match {
+  , test("list: matching") {
+      import list._
+      assert((1 :: 2 :: LNil) match {
         case _ :: xs => xs.head
         case _ => none
-      }) shouldBe 2.some
+      })(equalTo(2.some))
     }
-  }
-  "arrayview" - {
-    import arrayview._, ByteArrayView.unsafeWrap
-    "byte" - {
-      "matching" in {
-        unsafeWrap("hello".getBytes) match {
-          case 'h' +# xs => xs shouldBe unsafeWrap("ello".getBytes)
-          case _ => fail()
-        }
+  , test("arrayview: byte: matching") {
+      import arrayview._, ByteArrayView.unsafeWrap
+      unsafeWrap("hello".getBytes) match {
+        case 'h' +# xs => assert(xs)(equalTo(unsafeWrap("ello".getBytes)))
+        case _ => ???
       }
     }
-  }
-}
-
+  )
