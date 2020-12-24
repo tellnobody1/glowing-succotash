@@ -1,17 +1,18 @@
 package zero.ext
 
 import scala.annotation.tailrec
+import scala.collection.mutable
 import option._, either._
 
 package object traverse:
-  implicit class OptionEitherSequenceExt[A,B](x: Option[Either[A,B]]):
+  extension [A,B](x: Option[Either[A,B]])
     inline def sequence: Either[A, Option[B]] =
       x match
         case Some(Right(y)) => y.some.right
         case Some(Left(y)) => y.left
         case None => none.right
 
-  implicit class SeqEitherSequenceExt[A,B](xs: Seq[Either[A, B]]):
+  extension [A,B](xs: Seq[Either[A, B]])
     @tailrec private def _sequence(ys: Seq[Either[A, B]], acc: Vector[B]): Either[A, Vector[B]] =
       ys.headOption match
         case None => Right(acc)
@@ -26,7 +27,7 @@ package object traverse:
         case Some(Right(z)) => _sequence_(ys.tail)
     inline def sequence_ : Either[A, Unit] = _sequence_(xs)
 
-  implicit class ListOptionSequenceExt[A](xs: List[Option[A]]):
+  extension [A](xs: List[Option[A]])
     @tailrec private def _sequence(ys: List[Option[A]], acc: Vector[A]): Option[List[A]] =
       ys match
         case Nil => Some(acc.toList)
@@ -34,8 +35,7 @@ package object traverse:
         case Some(z) :: zs => _sequence(zs, acc :+ z)
     inline def sequence: Option[List[A]] = _sequence(xs, Vector.empty)
 
-  implicit class MapSequenceExt[K, V, E](xs: Map[K, Either[E, V]]):
-    import collection.mutable
+  extension [K, V, E](xs: Map[K, Either[E, V]])
     @tailrec private def _sequence(rem: Map[K, Either[E, V]], acc: mutable.Map[K, V]): Either[E, Map[K, V]] =
       rem.headOption match
         case Some((k, Right(v))) => _sequence(rem.tail, acc += (k->v))

@@ -3,11 +3,13 @@ package zero.ext.option
 package object cat:
   type F[A] = Option[A]
 
-  implicit class Functor[A,B](fn: Function1[A,B]):
+  /* Functor */
+  extension [A,B](fn: Function1[A,B])
     // (a -> b) -> f a -> f b
     inline def `<$>`(x: F[A]): F[B] = x.map(fn)
 
-  implicit class Apply[A,B](fn: F[Function1[A,B]]):
+  /* Apply */
+  extension [A,B](fn: F[Function1[A,B]])
     // f (a -> b) -> f a -> f b
     inline def <*>(x: => F[A]): F[B] = fn.flatMap(_ `<$>` x)
 

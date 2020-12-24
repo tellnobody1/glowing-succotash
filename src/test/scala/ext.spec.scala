@@ -11,11 +11,11 @@ object OtherSpec extends DefaultRunnableSpec:
     }
   , test("either") {
       import either._
-      val checkType1: Left[String,Int] = "left".left[Int]
-      val checkType2: Right[String,Int] = 0.right[String]
-      val checkType3: Either[String,String] = "left".left[Int].coerceRight[String]
-      val checkType4: Either[Int,Int] = 0.right[String].coerceLeft[Int]
-      assert(Right("").ensure("is empty")(_.nonEmpty))(equalTo(Left("is empty")))
+      val checkType1: Left[String,Int] = "left".left
+      val checkType2: Right[String,Int] = 0.right
+      val checkType3: Either[String,String] = "left".left
+      val checkType4: Either[Int,Int] = 0.right
+      assert(Right("").ensure("is empty")(_.nonEmpty))(equalTo(Left("is empty"): Either[String,String]))
       && assert(Left[String,String]("").ensure("is empty")(_.nonEmpty))(equalTo(Left("")))
       && assert(Left(0).leftMap(_ + 1))(equalTo(Left(1)))
       && assert(Right[Int,Int](0).leftMap(_ + 1))(equalTo(Right(0)))
