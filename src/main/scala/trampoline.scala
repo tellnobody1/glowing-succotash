@@ -1,4 +1,4 @@
-package zero.ext.trampoline
+package zero.ext
 
 object Trampoline:
   @annotation.tailrec
