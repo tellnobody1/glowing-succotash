@@ -12,3 +12,5 @@ testFrameworks += new TestFramework("zio.test.sbt.ZTestFramework")
 turbo := true
 useCoursier := true
 Global / onChangedBuildSource := ReloadOnSourceChanges
+
+resolvers += Resolver.JCenterRepository
