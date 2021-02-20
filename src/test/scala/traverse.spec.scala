@@ -1,8 +1,7 @@
 package zero.ext
-package traverse
 
 import zio.test._, Assertion._
-import either._, option._
+import option._
 
 object TraverseSpec extends DefaultRunnableSpec:
   def spec = suite("TraverseSpec")(
