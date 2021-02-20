@@ -1,4 +1,4 @@
-scalaVersion := "3.0.0-RC1"
+scalaVersion := "3.0.0-M3"
 githubOwner := "zero-deps"
 githubRepository := "ext"
 organization := "io.github.zero-deps"
