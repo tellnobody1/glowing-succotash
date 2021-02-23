@@ -14,4 +14,8 @@ extension (x: Array[Byte])
   inline def utf8: String =
     String(x, "utf8")
 
+extension (x: String)
+  inline def utf8: Array[Byte] =
+    x.getBytes("utf8").nn
+
 private val hexs = "0123456789abcdef".getBytes("ascii").nn
