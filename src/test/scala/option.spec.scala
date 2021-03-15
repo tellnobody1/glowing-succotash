@@ -1,7 +1,7 @@
 package zero.ext
 package option
 
-import zio.test._, Assertion._
+import zio.test.*, Assertion.*
 
 object OptionSpec extends DefaultRunnableSpec:
   def spec = suite("OptionSpec")(

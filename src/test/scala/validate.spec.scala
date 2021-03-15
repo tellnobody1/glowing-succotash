@@ -1,6 +1,6 @@
 package zero.ext
 
-import zio.test._, Assertion._
+import zio.test.*, Assertion.*
 
 object ValidateSpec extends DefaultRunnableSpec:
   def spec = suite("ValidateSpec")(

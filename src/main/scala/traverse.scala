@@ -2,7 +2,7 @@ package zero.ext
 
 import scala.annotation.tailrec
 import scala.collection.mutable
-import option._
+import option.*
 
 extension [A,B](x: Option[Either[A,B]])
   inline def sequence: Either[A, Option[B]] =
@@ -41,3 +41,5 @@ extension [K, V, E](xs: Map[K, Either[E, V]])
       case Some((k, l@Left(_))) => l.coerceRight
       case None => acc.to(Map).right
   inline def sequence: Either[E, Map[K, V]] = _sequence(xs, mutable.Map.empty)
+
+given CanEqual[None.type, Option[?]] = CanEqual.derived

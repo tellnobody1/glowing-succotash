@@ -4,7 +4,9 @@ package option
 val none = None
 
 extension [A](x: A | Null)
-  inline def toOption: Option[A] = if x != null then x.nn.some else none
+  inline def toOption: Option[A] =
+    given canEqual[A]: CanEqual[A | Null, Null] = CanEqual.derived
+    if x != null then x.some else none
 
 extension [A](x: A)
   inline def some: Some[A] = Some(x)

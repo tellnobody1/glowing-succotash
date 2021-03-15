@@ -1,6 +1,6 @@
 package zero.ext
 
-import zio.test._, Assertion._
+import zio.test.*, Assertion.*
 
 object EitherSpec extends DefaultRunnableSpec:
   def spec = suite("EitherSpec")(
