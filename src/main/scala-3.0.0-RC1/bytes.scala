@@ -31,7 +31,10 @@ extension (x: IArray[Byte])
     String(x.toArray, "utf8")
 
 extension (x: String)
-  inline def utf8: Array[Byte] =
+  inline def _utf8: Array[Byte] =
     x.getBytes("utf8").nn
+
+  inline def utf8: IArray[Byte] =
+    IArray.unsafeFromArray(x.getBytes("utf8").nn)
 
 private val hexs = "0123456789abcdef".getBytes("ascii").nn
