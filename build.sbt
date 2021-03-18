@@ -1,4 +1,5 @@
 scalaVersion := "3.0.0-RC1"
+crossScalaVersions := "3.0.0-RC1" :: "2.13.5" :: Nil
 githubOwner := "zero-deps"
 githubRepository := "ext"
 organization := "io.github.zero-deps"
@@ -9,18 +10,24 @@ libraryDependencies ++= Seq(
 )
 testFrameworks += new TestFramework("zio.test.sbt.ZTestFramework")
 
-turbo := true
-useCoursier := true
-Global / onChangedBuildSource := ReloadOnSourceChanges
+scalacOptions ++= {
+  CrossVersion.partialVersion(scalaVersion.value) match {
+    case Some((2, 13)) => Nil
+    case _ =>
+      Seq(
+        "-language:postfixOps"
+      , "-language:strictEquality"
+      , "-Yexplicit-nulls"
+      , "-source", "future-migration"
+      , "-deprecation"
+      , "-rewrite"
+      , "release", "15"
+      )
+  }
+}
 
 resolvers += Resolver.JCenterRepository
 
-scalacOptions ++= Seq(
-  "-language:postfixOps"
-, "-language:strictEquality"
-, "-Yexplicit-nulls"
-, "-source", "future-migration"
-, "-deprecation"
-, "-rewrite"
-, "release", "15"
-)
+turbo := true
+useCoursier := true
+Global / onChangedBuildSource := ReloadOnSourceChanges
