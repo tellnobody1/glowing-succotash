@@ -21,7 +21,7 @@ scalacOptions ++= {
       , "-source", "future-migration"
       , "-deprecation"
       , "-rewrite"
-      , "release", "15"
+      , "release", "11"
       )
   }
 }
