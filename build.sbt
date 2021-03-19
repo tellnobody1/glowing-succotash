@@ -1,7 +1,5 @@
 scalaVersion := "3.0.0-RC1"
 crossScalaVersions := "3.0.0-RC1" :: "2.13.5" :: Nil
-githubOwner := "zero-deps"
-githubRepository := "ext"
 organization := "io.github.zero-deps"
 version := zero.git.version()
 

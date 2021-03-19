@@ -1,4 +1,4 @@
-name: ci
+name: main
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2.3.4
@@ -16,6 +16,4 @@ jobs:
     - uses: actions/setup-java@v1.4.3
       with:
         java-version: 15.0.1
-    - env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: sbt test #publish
+    - run: sbt test
